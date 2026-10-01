@@ -1,0 +1,271 @@
+/* =====================================================
+   Northside Barbershop - one stylesheet for both pages.
+   The order of this file = the order of the page from top to bottom.
+
+   1. Colors and fonts
+   2. Navbar and buttons
+   3. Stripe (barber pole, animated)
+   4. Hero
+   5. Services   <- my own Grid + media queries
+   6. About
+   7. Barbers
+   8. Prices (table)
+   9. Booking (form and contacts)
+   10. FAQ
+   11. Footer
+   ===================================================== */
+
+
+/* ---------- 1. Colors and fonts ---------- */
+body {
+  font-family: "Work Sans", Arial, sans-serif;
+  background-color: #f6f1e7;
+  color: #14213d;
+}
+
+/* headings use the second font */
+h1, h2, legend, .navbar-brand {
+  font-family: "Oswald", Arial, sans-serif;
+  font-weight: 500;
+}
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; }
+
+
+/* ---------- 2. Navbar and buttons ---------- */
+.bg-dark-blue {
+  background-color: #14213d;
+}
+
+.btn-red {
+  background-color: #c8102e;
+  border-color: #c8102e;
+  color: white;
+  transition: 0.3s;          /* the color changes smoothly */
+}
+.btn-red:hover {
+  background-color: #14213d;
+  border-color: #14213d;
+  color: white;
+}
+
+/* link of the current page */
+.nav-link.active {
+  border-bottom: 2px solid #c8102e;
+}
+
+
+/* ---------- 3. Stripe: barber pole with a running animation ---------- */
+.stripe {
+  height: 14px;
+  /* red, white and blue stripes, 14px each */
+  background: repeating-linear-gradient(
+    45deg,
+    #c8102e 0px, #c8102e 14px,
+    white 14px, white 28px,
+    #14213d 28px, #14213d 42px
+  );
+  background-size: 59.4px 59.4px;               /* size of one pattern */
+  animation: stripe-move 1.5s linear infinite;  /* run "stripe-move" again and again */
+}
+
+/* the animation: move the stripes to the right by one pattern */
+@keyframes stripe-move {
+  to { background-position: 59.4px 0; }
+}
+
+
+/* ---------- 4. Hero ---------- */
+.hero {
+  background-color: #14213d;
+  color: white;
+  padding: 3rem 0;
+}
+
+/* opening hours box (hidden on a phone in the HTML) */
+.hours {
+  border: 2px solid white;
+  padding: 1.5rem;
+}
+
+
+/* ---------- 5. Services: my own CSS Grid + media queries ----------
+   Mobile-first: the base styles are for a phone (1 column).
+   Then @media (min-width) changes the layout on wider screens. */
+
+/* phone: 1 column */
+.services {
+  background-color: white;
+  padding: 3rem 1rem;
+}
+.services-box {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.services h2 {
+  text-align: center;
+}
+.services-lead {
+  text-align: center;
+}
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.service {
+  border: 2px solid #14213d;
+  padding: 1rem;
+}
+.service h3 {
+  font-size: 1.2rem;
+}
+.service p {
+  margin: 0;
+}
+
+/* tablet: 2 columns */
+@media (min-width: 768px) {
+  .services-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* laptop: 3 columns, bigger heading on the left */
+@media (min-width: 1024px) {
+  .services-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .services h2 {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+  .services-lead {
+    text-align: left;
+  }
+}
+
+
+/* ---------- 6. About ---------- */
+.facts {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+  border-left: 6px solid #c8102e;
+}
+.facts li {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+
+/* ---------- 7. Barbers (Bootstrap cards with my colors) ---------- */
+.barber {
+  border: 2px solid #14213d;
+  border-top: 8px solid #c8102e;
+  border-radius: 0;
+  transition: 0.3s;
+}
+/* hover: the border and the background change smoothly */
+.barber:hover {
+  border-color: #c8102e;
+  background-color: #f6f1e7;
+}
+/* Flexbox: the button goes to the bottom of every card */
+.barber .card-body {
+  display: flex;
+  flex-direction: column;
+}
+.barber .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+.role {
+  color: #5c5c5c;
+}
+
+
+/* ---------- 8. Prices (table) ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #14213d;
+}
+thead th {
+  background-color: #14213d;
+  color: white;
+}
+td:last-child {
+  text-align: right;        /* prices on the right */
+}
+tbody tr:hover {
+  background-color: #f6f1e7;
+}
+tfoot td {
+  font-weight: 600;
+  background-color: #f6f1e7;
+}
+
+
+/* ---------- 9. Booking: form and contacts ---------- */
+fieldset {
+  border: 2px solid #14213d;
+  padding: 1rem 1.25rem;
+}
+legend {
+  font-size: 1.25rem;
+}
+
+/* visible focus: the active field gets a red border */
+.form-control:focus,
+.form-select:focus {
+  border-color: #c8102e;
+  box-shadow: 0 0 0 3px #f2b8c0;
+}
+.form-check-input:checked {
+  background-color: #c8102e;
+  border-color: #c8102e;
+}
+
+.contacts {
+  background-color: #14213d;
+  color: white;
+  padding: 1.5rem;
+}
+/* Flexbox: the day is on the left, the time is on the right */
+.hours-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+
+/* ---------- 10. FAQ (Bootstrap accordion with my colors) ---------- */
+.accordion-button:not(.collapsed) {
+  background-color: #f6f1e7;
+  color: #14213d;
+}
+
+
+/* ---------- 11. Footer ---------- */
+footer {
+  background-color: #14213d;
+  color: white;
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+
+/* ---------- Bigger screens (laptop, from 992px) ---------- */
+@media (min-width: 992px) {
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.25rem; }
+  .hero { padding: 5rem 0; }
+}

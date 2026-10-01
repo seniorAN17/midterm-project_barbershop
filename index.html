@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northside Barbershop | Astana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR (Bootstrap). Same on both pages. Menu button on a phone, links in a row from 768px ===== -->
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Northside</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="booking.html">Prices &amp; Booking</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="stripe"></div>
+
+  <main>
+
+    <!-- ===== HERO (Bootstrap grid): text 7 of 12 columns, hours 5 of 12 (from 768px) ===== -->
+    <section class="hero">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-7">
+            <h1>Haircuts on Kabanbay Batyr since 2016</h1>
+            <p class="lead my-4">Five chairs, hot towels and a price list you can read before you sit down.</p>
+            <a href="booking.html#booking" class="btn btn-red btn-lg">Book a visit</a>
+            <!-- d-md-none: this button is shown ONLY on a phone -->
+            <a href="tel:+77000000000" class="btn btn-light btn-lg d-md-none">Call us</a>
+          </div>
+          <!-- d-none d-md-block: this box is HIDDEN on a phone -->
+          <div class="col-md-5 d-none d-md-block">
+            <div class="hours">
+              <h2 class="h4">Opening hours</h2>
+              <p class="mb-1">Mon - Fri: 10:00 - 21:00</p>
+              <p class="mb-1">Saturday: 10:00 - 20:00</p>
+              <p class="mb-0">Sunday: 12:00 - 18:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES: my own CSS (Grid + media queries), NO Bootstrap classes here ===== -->
+    <section class="services">
+      <div class="services-box">
+        <h2>What we do</h2>
+        <p class="services-lead">Every service includes a consultation and a neck clean-up. Prices are on the booking page.</p>
+        <div class="services-list">
+          <div class="service"><h3>Classic haircut</h3><p>Scissors or clipper, wash and styling.</p></div>
+          <div class="service"><h3>Beard trim</h3><p>Shape, line-up and beard oil.</p></div>
+          <div class="service"><h3>Hot towel shave</h3><p>Straight razor and two hot towels.</p></div>
+          <div class="service"><h3>Haircut + beard</h3><p>The most popular combination.</p></div>
+          <div class="service"><h3>Kids haircut</h3><p>For boys under 12.</p></div>
+          <div class="service"><h3>Styling</h3><p>Wash, dry and a product of your choice.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT (Bootstrap grid): 2 columns, one under another on a phone ===== -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-7">
+            <h2 class="mb-3">One chair, then five</h2>
+            <p>We opened in 2016 with one chair and a strong opinion about fades. Now there are five chairs and six barbers.</p>
+            <p>Every visit is the same: talk, cut, hot towel, finish. We give each client a full 45 minutes.</p>
+          </div>
+          <div class="col-12 col-md-5 mt-4 mt-md-0">
+            <ul class="facts">
+              <li>Opened in 2016</li>
+              <li>5 chairs, 6 barbers</li>
+              <li>45 minutes per client</li>
+              <li>Cash, card and Kaspi QR</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BARBERS (Bootstrap cards): 1 per row on a phone, 2 from 768px, 3 from 992px ===== -->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="mb-4">Our barbers</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+          <div class="col">
+            <div class="card barber h-100">
+              <div class="card-body">
+                <h3 class="h5">Aidar K.</h3>
+                <p class="role">Senior barber, 9 years</p>
+                <p>Skin fades and classic cuts. Books up two days ahead.</p>
+                <a href="booking.html#booking" class="btn btn-red">Book Aidar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card barber h-100">
+              <div class="card-body">
+                <h3 class="h5">Timur S.</h3>
+                <p class="role">Barber, 6 years</p>
+                <p>Beards and straight razor shaves.</p>
+                <a href="booking.html#booking" class="btn btn-red">Book Timur</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card barber h-100">
+              <div class="card-body">
+                <h3 class="h5">Dana M.</h3>
+                <p class="role">Barber, 5 years</p>
+                <p>Long hair, textured crops and scissor work.</p>
+                <a href="booking.html#booking" class="btn btn-red">Book Dana</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card barber h-100">
+              <div class="card-body">
+                <h3 class="h5">Ruslan B.</h3>
+                <p class="role">Barber, 4 years</p>
+                <p>Kids cuts and quick business trims.</p>
+                <a href="booking.html#booking" class="btn btn-red">Book Ruslan</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card barber h-100">
+              <div class="card-body">
+                <h3 class="h5">Arman N.</h3>
+                <p class="role">Barber, 3 years</p>
+                <p>Modern cuts and styling.</p>
+                <a href="booking.html#booking" class="btn btn-red">Book Arman</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card barber h-100">
+              <div class="card-body">
+                <h3 class="h5">Madi Z.</h3>
+                <p class="role">Junior barber, 1 year</p>
+                <p>Clean basics at a lower price.</p>
+                <a href="booking.html#booking" class="btn btn-red">Book Madi</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="stripe"></div>
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>Northside Barbershop, Kabanbay Batyr Ave 1, Astana. Student project, 2026.</span>
+      <span>Fonts: Oswald, Work Sans (Google Fonts)</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
