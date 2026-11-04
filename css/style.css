@@ -13,6 +13,7 @@
    9. Booking (form and contacts)
    10. FAQ
    11. Footer
+   12. Endterm: search, focus, form states, messages, picture
    ===================================================== */
 
 
@@ -260,6 +261,118 @@ footer {
   color: white;
   padding: 1.5rem 0;
   font-size: 0.9rem;
+}
+
+
+/* ---------- 12. Endterm: search, focus, form states, messages, picture ---------- */
+
+/* jQuery makes the smooth scroll, so the browser's own smooth scroll must be off */
+:root {
+  scroll-behavior: auto;
+}
+
+/* visible focus when the visitor uses the Tab key */
+a:focus-visible,
+button:focus-visible,
+.tool:focus-visible {
+  outline: 3px solid #c8102e;
+  outline-offset: 3px;
+}
+.navbar a:focus-visible,
+.navbar-toggler:focus-visible,
+.hero a:focus-visible,
+footer a:focus-visible {
+  outline-color: white;     /* red is hard to see on dark blue */
+}
+
+/* services: search field and category (Flexbox) */
+.services-tools {
+  display: flex;
+  flex-direction: column;      /* phone: one under another */
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.tool {
+  border: 2px solid #14213d;
+  border-radius: 0;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  color: #14213d;
+  background-color: white;
+}
+.tool:focus {
+  border-color: #c8102e;
+}
+@media (min-width: 768px) {
+  .services-tools { flex-direction: row; }   /* tablet and laptop: in one line */
+  .services-tools input { flex: 1; }
+  .services-tools select { width: 14rem; }
+}
+
+/* service cards (made by home.js) */
+.service {
+  transition: 0.3s;
+}
+.service:hover {
+  border-color: #c8102e;
+  background-color: #f6f1e7;
+}
+.service .service-meta {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #c8102e;
+}
+.no-result {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+/* form: error state (the classes is-invalid / invalid-feedback are from Bootstrap) */
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: #c8102e;
+}
+.invalid-feedback {
+  color: #c8102e;
+  font-weight: 600;
+}
+
+/* price under the service field */
+.summary {
+  border-left: 6px solid #c8102e;
+  padding-left: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* success message: hidden at the start, jQuery shows it */
+.success-box {
+  display: none;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background-color: #f6f1e7;
+  border: 2px solid #14213d;
+  border-left: 8px solid #c8102e;
+}
+
+/* barber pictures: the picture has the same dark blue background as the strip around it */
+.barber-photo {
+  height: 200px;
+  object-fit: contain;
+  background-color: #14213d;
+  border-radius: 0;
+}
+
+/* About: picture and facts in one line (Flexbox) */
+.about-side {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.pole {
+  width: 80px;
+  height: auto;
 }
 
 
