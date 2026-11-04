@@ -11,7 +11,7 @@
 <body>
 
   <!-- ===== NAVBAR (Bootstrap). Same on both pages. Menu button on a phone, links in a row from 768px ===== -->
-  <header>
+  <header id="top">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue">
       <div class="container">
         <a class="navbar-brand" href="index.html">Northside</a>
@@ -55,19 +55,23 @@
       </div>
     </section>
 
-    <!-- ===== SERVICES: my own CSS (Grid + media queries), NO Bootstrap classes here ===== -->
+    <!-- ===== SERVICES: my own CSS (Grid + media queries), NO Bootstrap classes here.
+         The cards are NOT written here: home.js builds them from the array in services.js ===== -->
     <section class="services">
       <div class="services-box">
         <h2>What we do</h2>
-        <p class="services-lead">Every service includes a consultation and a neck clean-up. Prices are on the booking page.</p>
-        <div class="services-list">
-          <div class="service"><h3>Classic haircut</h3><p>Scissors or clipper, wash and styling.</p></div>
-          <div class="service"><h3>Beard trim</h3><p>Shape, line-up and beard oil.</p></div>
-          <div class="service"><h3>Hot towel shave</h3><p>Straight razor and two hot towels.</p></div>
-          <div class="service"><h3>Haircut + beard</h3><p>The most popular combination.</p></div>
-          <div class="service"><h3>Kids haircut</h3><p>For boys under 12.</p></div>
-          <div class="service"><h3>Styling</h3><p>Wash, dry and a product of your choice.</p></div>
+        <p class="services-lead">Every service includes a consultation and a neck clean-up. Search by name or choose a category.</p>
+        <div class="services-tools">
+          <input type="search" id="service-search" class="tool" placeholder="Search a service, for example beard" aria-label="Search a service">
+          <select id="service-category" class="tool" aria-label="Choose a category">
+            <option value="all">All services</option>
+            <option value="haircut">Haircuts</option>
+            <option value="beard">Beard and shave</option>
+            <option value="styling">Styling</option>
+          </select>
         </div>
+        <div id="services-list" class="services-list"></div>
+        <p id="no-result" class="no-result" hidden>Nothing found. Try another word or choose "All services".</p>
       </div>
     </section>
 
@@ -81,12 +85,16 @@
             <p>Every visit is the same: talk, cut, hot towel, finish. We give each client a full 45 minutes.</p>
           </div>
           <div class="col-12 col-md-5 mt-4 mt-md-0">
-            <ul class="facts">
-              <li>Opened in 2016</li>
-              <li>5 chairs, 6 barbers</li>
-              <li>45 minutes per client</li>
-              <li>Cash, card and Kaspi QR</li>
-            </ul>
+            <!-- own Flexbox: the picture and the list are in one line -->
+            <div class="about-side">
+              <img src="images/barber-pole.svg" alt="Illustration of a barber pole with red, white and blue stripes" class="pole" width="80" height="200">
+              <ul class="facts">
+                <li>Opened in 2016</li>
+                <li>5 chairs, 6 barbers</li>
+                <li>45 minutes per client</li>
+                <li>Cash, card and Kaspi QR</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -100,7 +108,8 @@
 
           <div class="col">
             <div class="card barber h-100">
-              <div class="card-body">
+              <img src="images/barbers/aidar.svg" class="card-img-top barber-photo" alt="Illustration of barber Aidar" width="200" height="200">
+                <div class="card-body">
                 <h3 class="h5">Aidar K.</h3>
                 <p class="role">Senior barber, 9 years</p>
                 <p>Skin fades and classic cuts. Books up two days ahead.</p>
@@ -111,7 +120,8 @@
 
           <div class="col">
             <div class="card barber h-100">
-              <div class="card-body">
+              <img src="images/barbers/timur.svg" class="card-img-top barber-photo" alt="Illustration of barber Timur" width="200" height="200">
+                <div class="card-body">
                 <h3 class="h5">Timur S.</h3>
                 <p class="role">Barber, 6 years</p>
                 <p>Beards and straight razor shaves.</p>
@@ -122,7 +132,8 @@
 
           <div class="col">
             <div class="card barber h-100">
-              <div class="card-body">
+              <img src="images/barbers/dana.svg" class="card-img-top barber-photo" alt="Illustration of barber Dana" width="200" height="200">
+                <div class="card-body">
                 <h3 class="h5">Dana M.</h3>
                 <p class="role">Barber, 5 years</p>
                 <p>Long hair, textured crops and scissor work.</p>
@@ -133,7 +144,8 @@
 
           <div class="col">
             <div class="card barber h-100">
-              <div class="card-body">
+              <img src="images/barbers/ruslan.svg" class="card-img-top barber-photo" alt="Illustration of barber Ruslan" width="200" height="200">
+                <div class="card-body">
                 <h3 class="h5">Ruslan B.</h3>
                 <p class="role">Barber, 4 years</p>
                 <p>Kids cuts and quick business trims.</p>
@@ -144,7 +156,8 @@
 
           <div class="col">
             <div class="card barber h-100">
-              <div class="card-body">
+              <img src="images/barbers/arman.svg" class="card-img-top barber-photo" alt="Illustration of barber Arman" width="200" height="200">
+                <div class="card-body">
                 <h3 class="h5">Arman N.</h3>
                 <p class="role">Barber, 3 years</p>
                 <p>Modern cuts and styling.</p>
@@ -155,7 +168,8 @@
 
           <div class="col">
             <div class="card barber h-100">
-              <div class="card-body">
+              <img src="images/barbers/madi.svg" class="card-img-top barber-photo" alt="Illustration of barber Madi" width="200" height="200">
+                <div class="card-body">
                 <h3 class="h5">Madi Z.</h3>
                 <p class="role">Junior barber, 1 year</p>
                 <p>Clean basics at a lower price.</p>
@@ -175,10 +189,15 @@
   <footer>
     <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
       <span>Northside Barbershop, Kabanbay Batyr Ave 1, Astana. Student project, 2026.</span>
-      <span>Fonts: Oswald, Work Sans (Google Fonts)</span>
+      <span>Fonts: Oswald, Work Sans (Google Fonts). Illustration and code help: Claude (AI).</span>
+      <a href="#top" class="scroll-link text-white">Back to top</a>
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>

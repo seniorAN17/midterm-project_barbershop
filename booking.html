@@ -11,7 +11,7 @@
 <body>
 
   <!-- ===== NAVBAR (the same as on the home page, but here "Prices & Booking" is active) ===== -->
-  <header>
+  <header id="top">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue">
       <div class="container">
         <a class="navbar-brand" href="index.html">Northside</a>
@@ -36,6 +36,8 @@
       <div class="container">
         <h1>Prices &amp; booking</h1>
         <p class="lead mb-0">Check the price list, then pick a time.</p>
+        <!-- scroll-link: jQuery moves the page smoothly to #booking (main.js) -->
+        <a href="#booking" class="btn btn-red btn-lg mt-4 scroll-link">Go to the booking form</a>
       </div>
     </section>
 
@@ -60,8 +62,10 @@
             </thead>
             <tbody>
               <tr><th scope="row">Classic haircut</th><td>45 min</td><td>Any</td><td>5 000 ₸</td></tr>
+              <tr><th scope="row">Fade haircut</th><td>50 min</td><td>Aidar</td><td>6 000 ₸</td></tr>
               <tr><th scope="row">Beard trim</th><td>30 min</td><td>Any</td><td>3 000 ₸</td></tr>
               <tr><th scope="row">Hot towel shave</th><td>30 min</td><td>Timur</td><td>4 000 ₸</td></tr>
+              <tr><th scope="row">Head shave</th><td>30 min</td><td>Timur</td><td>4 500 ₸</td></tr>
               <tr><th scope="row">Haircut + beard</th><td>60 min</td><td>Any</td><td>7 500 ₸</td></tr>
               <tr><th scope="row">Kids haircut</th><td>30 min</td><td>Any</td><td>3 500 ₸</td></tr>
               <tr><th scope="row">Styling</th><td>15 min</td><td>Any</td><td>2 000 ₸</td></tr>
@@ -87,21 +91,25 @@
 
           <div class="col-12 col-lg-7">
             <h2 class="mb-4">Book a visit</h2>
-            <form action="#" method="post">
+            <!-- novalidate: the browser does not check the form, my JavaScript (booking.js) does -->
+            <form id="booking-form" action="#" method="post" novalidate>
 
               <fieldset class="mb-4">
                 <legend>Your details</legend>
                 <div class="mb-3">
                   <label for="name" class="form-label">Name</label>
                   <input type="text" class="form-control" id="name" name="name" required>
+                  <div class="invalid-feedback" id="name-error"></div>
                 </div>
                 <div class="mb-3">
                   <label for="phone" class="form-label">Phone</label>
                   <input type="tel" class="form-control" id="phone" name="phone" placeholder="+7 700 000 00 00" required>
+                  <div class="invalid-feedback" id="phone-error"></div>
                 </div>
                 <div>
                   <label for="email" class="form-label">Email (optional)</label>
                   <input type="email" class="form-control" id="email" name="email">
+                  <div class="invalid-feedback" id="email-error"></div>
                 </div>
               </fieldset>
 
@@ -110,22 +118,23 @@
                 <div class="mb-3">
                   <label for="date" class="form-label">Date</label>
                   <input type="date" class="form-control" id="date" name="date" required>
+                  <div class="invalid-feedback" id="date-error"></div>
                 </div>
                 <div class="mb-3">
                   <label for="time" class="form-label">Time (10:00 - 21:00)</label>
-                  <input type="time" class="form-control" id="time" name="time" min="10:00" max="21:00">
+                  <input type="time" class="form-control" id="time" name="time" min="10:00" max="21:00" required>
+                  <div class="invalid-feedback" id="time-error"></div>
                 </div>
                 <div class="mb-3">
                   <label for="service" class="form-label">Service</label>
-                  <select class="form-select" id="service" name="service">
-                    <option>Classic haircut</option>
-                    <option>Beard trim</option>
-                    <option>Hot towel shave</option>
-                    <option>Haircut + beard</option>
-                    <option>Kids haircut</option>
-                    <option>Styling</option>
-                  </select>
+                  <select class="form-select" id="service" name="service"></select>  <!-- options are added by booking.js -->
                 </div>
+
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="student" name="student">
+                  <label class="form-check-label" for="student">I am a student (-10%, Monday to Thursday)</label>
+                </div>
+                <p id="summary" class="summary" aria-live="polite"></p>
 
                 <!-- select: a drop-down list. The first option is "Any barber"-->
                 <div class="mb-3">
@@ -152,6 +161,7 @@
               </fieldset>
 
               <button type="submit" class="btn btn-red btn-lg">Send request</button>
+              <div id="success" class="success-box" role="status"></div>
             </form>
           </div>
 
@@ -175,7 +185,6 @@
     <!-- ===== FAQ (Bootstrap accordion): one question is open at a time ===== -->
     <section class="py-5">
       <div class="container">
-        <!-- mb-4 = margin-bottom: 1.5rem (24px) add some space between the title and the accordion -->
         <h2 class="mb-4">Questions before you come</h2>
         <div class="accordion" id="faq">
 
@@ -217,10 +226,15 @@
   <footer>
     <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
       <span>Northside Barbershop, Kabanbay Batyr Ave 1, Astana. Student project, 2026.</span>
-      <span>Fonts: Oswald, Work Sans (Google Fonts)</span>
+      <span>Fonts: Oswald, Work Sans (Google Fonts). Illustration and code help: Claude (AI).</span>
+      <a href="#top" class="scroll-link text-white">Back to top</a>
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/booking.js"></script>
 </body>
 </html>
