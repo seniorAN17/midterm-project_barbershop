@@ -8,14 +8,19 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="images/barber-pole.svg">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/storage.js"></script>
+  <script src="js/theme.js"></script>
 </head>
 <body>
 
   <!-- ===== NAVBAR (Bootstrap). Same on both pages. Menu button on a phone, links in a row from 768px ===== -->
   <header id="top">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue">
-      <div class="container">
+      <!-- container-fluid = the whole width of the screen: the logo is at the left edge, the links at the right edge -->
+      <div class="container-fluid px-3 px-md-4">
         <a class="navbar-brand" href="index.html">Northside</a>
+        <!-- light / dark mode button: js/theme.js. On a phone it is next to the menu button, from 768px at the right end -->
+        <button class="theme-toggle ms-auto me-2 ms-md-3 me-md-0 order-md-last" type="button" id="theme-toggle">Dark mode</button>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,6 +28,7 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="booking.html">Prices &amp; Booking</a></li>
+            <li class="nav-item"><a class="nav-link" href="bookings.html">My bookings <span class="count" id="booking-count">0</span></a></li>
           </ul>
         </div>
       </div>
@@ -61,11 +67,12 @@
     <section class="services">
       <div class="services-box">
         <h2>What we do</h2>
-        <p class="services-lead">Every service includes a consultation and a neck clean-up. Search by name or choose a category.</p>
+        <p class="services-lead">Every service includes a consultation and a neck clean-up. Search by name or choose a category. The most popular services come first, or choose "Popular".</p>
         <div class="services-tools">
           <input type="search" id="service-search" class="tool" placeholder="Search a service, for example beard" aria-label="Search a service">
           <select id="service-category" class="tool" aria-label="Choose a category">
             <option value="all">All services</option>
+            <option value="top3">Popular</option>
             <option value="haircut">Haircuts</option>
             <option value="beard">Beard and shave</option>
             <option value="styling">Styling</option>
@@ -102,79 +109,79 @@
     </section>
 
     <!-- ===== BARBERS (Bootstrap cards): 1 per row on a phone, 2 from 768px, 3 from 992px ===== -->
-    <section class="py-5 bg-white">
+    <section class="py-5 section-surface">
       <div class="container">
         <h2 class="mb-4">Our barbers</h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
           <div class="col">
             <div class="card barber h-100">
-              <img src="images/aidar.svg" class="card-img-top barber-photo" alt="Illustration of barber Aidar" width="200" height="200">
+              <img src="images/barbers/aidar.svg" class="card-img-top barber-photo" alt="Illustration of barber Aidar" width="200" height="200">
                 <div class="card-body">
                 <h3 class="h5">Aidar K.</h3>
                 <p class="role">Senior barber, 9 years</p>
                 <p>Skin fades and classic cuts. Books up two days ahead.</p>
-                <a href="booking.html#booking" class="btn btn-red">Book Aidar</a>
+                <a href="booking.html?barber=aidar#booking" class="btn btn-red">Book Aidar</a>
               </div>
             </div>
           </div>
 
           <div class="col">
             <div class="card barber h-100">
-              <img src="images/timur.svg" class="card-img-top barber-photo" alt="Illustration of barber Timur" width="200" height="200">
+              <img src="images/barbers/timur.svg" class="card-img-top barber-photo" alt="Illustration of barber Timur" width="200" height="200">
                 <div class="card-body">
                 <h3 class="h5">Timur S.</h3>
                 <p class="role">Barber, 6 years</p>
                 <p>Beards and straight razor shaves.</p>
-                <a href="booking.html#booking" class="btn btn-red">Book Timur</a>
+                <a href="booking.html?barber=timur#booking" class="btn btn-red">Book Timur</a>
               </div>
             </div>
           </div>
 
           <div class="col">
             <div class="card barber h-100">
-              <img src="images/dana.svg" class="card-img-top barber-photo" alt="Illustration of barber Dana" width="200" height="200">
+              <img src="images/barbers/dana.svg" class="card-img-top barber-photo" alt="Illustration of barber Dana" width="200" height="200">
                 <div class="card-body">
                 <h3 class="h5">Dana M.</h3>
                 <p class="role">Barber, 5 years</p>
                 <p>Long hair, textured crops and scissor work.</p>
-                <a href="booking.html#booking" class="btn btn-red">Book Dana</a>
+                <a href="booking.html?barber=dana#booking" class="btn btn-red">Book Dana</a>
               </div>
             </div>
           </div>
 
           <div class="col">
             <div class="card barber h-100">
-              <img src="images/ruslan.svg" class="card-img-top barber-photo" alt="Illustration of barber Ruslan" width="200" height="200">
+              <img src="images/barbers/ruslan.svg" class="card-img-top barber-photo" alt="Illustration of barber Ruslan" width="200" height="200">
                 <div class="card-body">
                 <h3 class="h5">Ruslan B.</h3>
                 <p class="role">Barber, 4 years</p>
                 <p>Kids cuts and quick business trims.</p>
-                <a href="booking.html#booking" class="btn btn-red">Book Ruslan</a>
+                <a href="booking.html?barber=ruslan#booking" class="btn btn-red">Book Ruslan</a>
               </div>
             </div>
           </div>
 
           <div class="col">
             <div class="card barber h-100">
-              <img src="images/arman.svg" class="card-img-top barber-photo" alt="Illustration of barber Arman" width="200" height="200">
+              <img src="images/barbers/arman.svg" class="card-img-top barber-photo" alt="Illustration of barber Arman" width="200" height="200">
                 <div class="card-body">
                 <h3 class="h5">Arman N.</h3>
                 <p class="role">Barber, 3 years</p>
                 <p>Modern cuts and styling.</p>
-                <a href="booking.html#booking" class="btn btn-red">Book Arman</a>
+                <a href="booking.html?barber=arman#booking" class="btn btn-red">Book Arman</a>
               </div>
             </div>
           </div>
 
           <div class="col">
             <div class="card barber h-100">
-              <img src="images/madi.svg" class="card-img-top barber-photo" alt="Illustration of barber Madi" width="200" height="200">
+              <img src="images/barbers/madi.svg" class="card-img-top barber-photo" alt="Illustration of barber Madi" width="200" height="200">
                 <div class="card-body">
                 <h3 class="h5">Madi Z.</h3>
                 <p class="role">Junior barber, 1 year</p>
                 <p>Clean basics at a lower price.</p>
-                <a href="booking.html#booking" class="btn btn-red">Book Madi</a>
+                <a href="booking.html?barber=madi#booking" class="btn btn-red">Book Madi</a>
               </div>
             </div>
           </div>

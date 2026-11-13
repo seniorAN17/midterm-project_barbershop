@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My bookings | Northside Barbershop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="images/barber-pole.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/storage.js"></script>
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR (the same as on the other pages, but here "My bookings" is active) ===== -->
+  <header id="top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue">
+      <!-- container-fluid = the whole width of the screen: the logo is at the left edge, the links at the right edge -->
+      <div class="container-fluid px-3 px-md-4">
+        <a class="navbar-brand" href="index.html">Northside</a>
+        <!-- light / dark mode button: js/theme.js. On a phone it is next to the menu button, from 768px at the right end -->
+        <button class="theme-toggle ms-auto me-2 ms-md-3 me-md-0 order-md-last" type="button" id="theme-toggle">Dark mode</button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="booking.html">Prices &amp; Booking</a></li>
+            <li class="nav-item"><a class="nav-link active" href="bookings.html">My bookings <span class="count" id="booking-count">0</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="stripe"></div>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="container">
+        <h1>My bookings</h1>
+        <p class="lead mb-0">Your visits are saved in this browser. This is a demo: there is no server and no account.</p>
+      </div>
+    </section>
+
+    <!-- ===== LIST: the cards are built by js/bookings.js from the data in localStorage ===== -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="mb-4">Saved visits</h2>
+
+        <div id="bookings-bar" class="bookings-bar" hidden>
+          <p id="bookings-summary" class="bookings-summary" aria-live="polite"></p>
+          <button type="button" class="btn btn-red" id="clear-all">Clear all</button>
+        </div>
+
+        <div id="bookings-list" class="bookings-list"></div>
+
+        <!-- the empty state: shown when there are no bookings -->
+        <div id="bookings-empty" class="empty-box" hidden>
+          <h3 class="h4">No bookings yet</h3>
+          <p>Book your first visit and it will appear here.</p>
+          <a href="booking.html#booking" class="btn btn-red btn-lg">Book a visit</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="stripe"></div>
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>Northside Barbershop, Kabanbay Batyr Ave 1, Astana. Student project, 2026.</span>
+      <span>Fonts: Oswald, Work Sans (Google Fonts). Illustration and code help: Claude (AI).</span>
+      <a href="#top" class="scroll-link text-white">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/bookings.js"></script>
+</body>
+</html>
