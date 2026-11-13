@@ -2,6 +2,7 @@
    Northside Barbershop - one stylesheet for both pages.
    The order of this file = the order of the page from top to bottom.
 
+   0. Colors as CSS variables (light and dark mode)
    1. Colors and fonts
    2. Navbar and buttons
    3. Stripe (barber pole, animated)
@@ -14,14 +15,61 @@
    10. FAQ
    11. Footer
    12. Endterm: search, focus, form states, messages, picture
+   13. Final: dark mode details, navbar button, My bookings page
    ===================================================== */
+
+/* ---------- 0. Colors as CSS variables ----------
+   Light mode = the values in :root.
+   Dark mode = the same names with other values. They are used when <html> has data-bs-theme="dark"
+   (js/theme.js sets this attribute). All other rules use var(--name), so no color is written twice. */
+:root {
+  --bg: #f6f1e7;           /* page background */
+  --surface: #ffffff;      /* white blocks: sections, cards, table, fields */
+  --surface-alt: #f6f1e7;  /* soft blocks: hover, table footer, messages */
+  --text: #14213d;         /* text color */
+  --muted: #5c5c5c;        /* second text */
+  --line: #14213d;         /* strong borders */
+  --line-soft: #dee2e6;    /* soft borders of fields */
+  --brand: #14213d;        /* navbar, hero, footer, contacts */
+  --red: #c8102e;          /* buttons, lines */
+  --red-text: #c8102e;     /* red text and prices */
+  --focus: #c8102e;        /* outline of the Tab key */
+  --ring: #f2b8c0;         /* glow around the active field */
+  --btn-hover: #14213d;    /* red button on hover */
+  --stripe-white: #ffffff;
+  --stripe-blue: #14213d;
+
+  /* Bootstrap has its own variables: they get my colors too */
+  --bs-body-bg: var(--surface);
+  --bs-body-color: var(--text);
+  --bs-border-color: var(--line-soft);
+  --bs-secondary-color: var(--muted);
+}
+
+[data-bs-theme="dark"] {
+  --bg: #0d1424;
+  --surface: #16213a;
+  --surface-alt: #1f2d4d;
+  --text: #eef1f7;
+  --muted: #b3bccd;
+  --line: #6d80a8;
+  --line-soft: #3a4a6d;
+  --brand: #080e1a;
+  --red: #c8102e;
+  --red-text: #ff7b8f;     /* lighter red: it must be readable on a dark background */
+  --focus: #ff9aa9;
+  --ring: #7d2a3a;
+  --btn-hover: #8f0c24;
+  --stripe-white: #e6e9f0;
+  --stripe-blue: #080e1a;
+}
 
 
 /* ---------- 1. Colors and fonts ---------- */
 body {
   font-family: "Work Sans", Arial, sans-serif;
-  background-color: #f6f1e7;
-  color: #14213d;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 /* headings use the second font */
@@ -35,24 +83,24 @@ h2 { font-size: 1.75rem; }
 
 /* ---------- 2. Navbar and buttons ---------- */
 .bg-dark-blue {
-  background-color: #14213d;
+  background-color: var(--brand);
 }
 
 .btn-red {
-  background-color: #c8102e;
-  border-color: #c8102e;
+  background-color: var(--red);
+  border-color: var(--red);
   color: white;
   transition: 0.3s;          /* the color changes smoothly */
 }
 .btn-red:hover {
-  background-color: #14213d;
-  border-color: #14213d;
+  background-color: var(--btn-hover);
+  border-color: var(--btn-hover);
   color: white;
 }
 
 /* link of the current page */
 .nav-link.active {
-  border-bottom: 2px solid #c8102e;
+  border-bottom: 2px solid var(--red);
 }
 
 
@@ -62,9 +110,9 @@ h2 { font-size: 1.75rem; }
   /* red, white and blue stripes, 14px each */
   background: repeating-linear-gradient(
     45deg,
-    #c8102e 0px, #c8102e 14px,
-    white 14px, white 28px,
-    #14213d 28px, #14213d 42px
+    var(--red) 0px, var(--red) 14px,
+    var(--stripe-white) 14px, var(--stripe-white) 28px,
+    var(--stripe-blue) 28px, var(--stripe-blue) 42px
   );
   background-size: 59.4px 59.4px;               /* size of one pattern */
   animation: stripe-move 1.5s linear infinite;  /* run "stripe-move" again and again */
@@ -78,7 +126,7 @@ h2 { font-size: 1.75rem; }
 
 /* ---------- 4. Hero ---------- */
 .hero {
-  background-color: #14213d;
+  background-color: var(--brand);
   color: white;
   padding: 3rem 0;
 }
@@ -96,7 +144,7 @@ h2 { font-size: 1.75rem; }
 
 /* phone: 1 column */
 .services {
-  background-color: white;
+  background-color: var(--surface);
   padding: 3rem 1rem;
 }
 .services-box {
@@ -116,7 +164,7 @@ h2 { font-size: 1.75rem; }
   margin-top: 2rem;
 }
 .service {
-  border: 2px solid #14213d;
+  border: 2px solid var(--line);
   padding: 1rem;
 }
 .service h3 {
@@ -154,7 +202,7 @@ h2 { font-size: 1.75rem; }
   list-style: none;
   padding-left: 1rem;
   margin: 0;
-  border-left: 6px solid #c8102e;
+  border-left: 6px solid var(--red);
 }
 .facts li {
   margin-bottom: 0.75rem;
@@ -164,15 +212,15 @@ h2 { font-size: 1.75rem; }
 
 /* ---------- 7. Barbers (Bootstrap cards with my colors) ---------- */
 .barber {
-  border: 2px solid #14213d;
-  border-top: 8px solid #c8102e;
+  border: 2px solid var(--line);
+  border-top: 8px solid var(--red);
   border-radius: 0;
   transition: 0.3s;
 }
 /* hover: the border and the background change smoothly */
 .barber:hover {
-  border-color: #c8102e;
-  background-color: #f6f1e7;
+  border-color: var(--red);
+  background-color: var(--surface-alt);
 }
 /* Flexbox: the button goes to the bottom of every card */
 .barber .card-body {
@@ -184,7 +232,7 @@ h2 { font-size: 1.75rem; }
   align-self: flex-start;
 }
 .role {
-  color: #5c5c5c;
+  color: var(--muted);
 }
 
 
@@ -192,32 +240,32 @@ h2 { font-size: 1.75rem; }
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
+  background-color: var(--surface);
 }
 th, td {
   padding: 0.75rem;
   text-align: left;
-  border: 1px solid #14213d;
+  border: 1px solid var(--line);
 }
 thead th {
-  background-color: #14213d;
+  background-color: var(--brand);
   color: white;
 }
 td:last-child {
   text-align: right;        /* prices on the right */
 }
 tbody tr:hover {
-  background-color: #f6f1e7;
+  background-color: var(--surface-alt);
 }
 tfoot td {
   font-weight: 600;
-  background-color: #f6f1e7;
+  background-color: var(--surface-alt);
 }
 
 
 /* ---------- 9. Booking: form and contacts ---------- */
 fieldset {
-  border: 2px solid #14213d;
+  border: 2px solid var(--line);
   padding: 1rem 1.25rem;
 }
 legend {
@@ -227,16 +275,16 @@ legend {
 /* visible focus: the active field gets a red border */
 .form-control:focus,
 .form-select:focus {
-  border-color: #c8102e;
-  box-shadow: 0 0 0 3px #f2b8c0;
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px var(--ring);
 }
 .form-check-input:checked {
-  background-color: #c8102e;
-  border-color: #c8102e;
+  background-color: var(--red);
+  border-color: var(--red);
 }
 
 .contacts {
-  background-color: #14213d;
+  background-color: var(--brand);
   color: white;
   padding: 1.5rem;
 }
@@ -250,14 +298,14 @@ legend {
 
 /* ---------- 10. FAQ (Bootstrap accordion with my colors) ---------- */
 .accordion-button:not(.collapsed) {
-  background-color: #f6f1e7;
-  color: #14213d;
+  background-color: var(--surface-alt);
+  color: var(--text);
 }
 
 
 /* ---------- 11. Footer ---------- */
 footer {
-  background-color: #14213d;
+  background-color: var(--brand);
   color: white;
   padding: 1.5rem 0;
   font-size: 0.9rem;
@@ -275,7 +323,7 @@ footer {
 a:focus-visible,
 button:focus-visible,
 .tool:focus-visible {
-  outline: 3px solid #c8102e;
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 .navbar a:focus-visible,
@@ -283,6 +331,34 @@ button:focus-visible,
 .hero a:focus-visible,
 footer a:focus-visible {
   outline-color: white;     /* red is hard to see on dark blue */
+}
+
+/* Bootstrap sets its own blue focus and a transparent background on .btn:focus and .btn:active.
+   My rules are stronger, so the red buttons keep their color and the focus stays red/white */
+.btn.btn-red:focus,
+.btn.btn-red:focus-visible,
+.btn.btn-red:active {
+  background-color: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+.navbar .nav-link:focus-visible,
+.hero .btn:focus-visible {
+  outline-color: white;
+}
+.navbar-toggler:focus,
+.accordion-button:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 3px var(--ring);
+}
+.form-check-input:focus {
+  border-color: var(--red);
 }
 
 /* services: search field and category (Flexbox) */
@@ -293,15 +369,15 @@ footer a:focus-visible {
   margin-top: 1.5rem;
 }
 .tool {
-  border: 2px solid #14213d;
+  border: 2px solid var(--line);
   border-radius: 0;
   padding: 0.6rem 0.75rem;
   font: inherit;
-  color: #14213d;
-  background-color: white;
+  color: var(--text);
+  background-color: var(--surface);
 }
 .tool:focus {
-  border-color: #c8102e;
+  border-color: var(--red);
 }
 @media (min-width: 768px) {
   .services-tools { flex-direction: row; }   /* tablet and laptop: in one line */
@@ -311,16 +387,31 @@ footer a:focus-visible {
 
 /* service cards (made by home.js) */
 .service {
-  transition: 0.3s;
+  transition: border-color 0.3s, background-color 0.3s;   /* not "all": jQuery fades the opacity */
 }
 .service:hover {
-  border-color: #c8102e;
-  background-color: #f6f1e7;
+  border-color: var(--red);
+  background-color: var(--surface-alt);
+}
+.service {
+  position: relative;
+}
+.badge-popular {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: var(--red);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
 }
 .service .service-meta {
   margin-top: 0.5rem;
   font-weight: 600;
-  color: #c8102e;
+  color: var(--red-text);
 }
 .no-result {
   text-align: center;
@@ -331,16 +422,16 @@ footer a:focus-visible {
 /* form: error state (the classes is-invalid / invalid-feedback are from Bootstrap) */
 .form-control.is-invalid,
 .form-select.is-invalid {
-  border-color: #c8102e;
+  border-color: var(--red);
 }
 .invalid-feedback {
-  color: #c8102e;
+  color: var(--red-text);
   font-weight: 600;
 }
 
 /* price under the service field */
 .summary {
-  border-left: 6px solid #c8102e;
+  border-left: 6px solid var(--red);
   padding-left: 1rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -351,16 +442,16 @@ footer a:focus-visible {
   display: none;
   margin-top: 1.5rem;
   padding: 1rem 1.25rem;
-  background-color: #f6f1e7;
-  border: 2px solid #14213d;
-  border-left: 8px solid #c8102e;
+  background-color: var(--surface-alt);
+  border: 2px solid var(--line);
+  border-left: 8px solid var(--red);
 }
 
 /* barber pictures: the picture has the same dark blue background as the strip around it */
 .barber-photo {
   height: 200px;
   object-fit: contain;
-  background-color: #14213d;
+  background-color: #14213d;   /* the same blue as in the SVG pictures */
   border-radius: 0;
 }
 
@@ -373,6 +464,145 @@ footer a:focus-visible {
 .pole {
   width: 80px;
   height: auto;
+}
+
+
+/* ---------- 13. Final: dark mode details, navbar button, My bookings page ---------- */
+
+/* Bootstrap parts that need my colors in both modes */
+.barber {
+  --bs-card-bg: var(--surface);
+  --bs-card-color: var(--text);
+}
+.accordion {
+  --bs-accordion-bg: var(--surface);
+  --bs-accordion-color: var(--text);
+  --bs-accordion-border-color: var(--line-soft);
+  --bs-accordion-btn-color: var(--text);
+  --bs-accordion-btn-bg: var(--surface);
+  --bs-accordion-active-bg: var(--surface-alt);
+  --bs-accordion-active-color: var(--text);
+}
+.form-control,
+.form-select {
+  background-color: var(--surface);
+  color: var(--text);
+}
+.section-surface {
+  background-color: var(--surface);     /* replaces the Bootstrap class bg-white, which is always white */
+}
+.note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.success-box a {
+  color: var(--red-text);
+  font-weight: 600;
+}
+
+/* light / dark button in the navbar */
+.theme-toggle {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.25rem 0.75rem;
+  font: inherit;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+.theme-toggle:hover {
+  background-color: var(--red);
+  border-color: var(--red);
+}
+.theme-toggle:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+/* the number of bookings in the navbar */
+.count {
+  display: inline-block;
+  min-width: 1.4rem;
+  padding: 0 0.4rem;
+  background-color: var(--red);
+  color: white;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* My bookings: the counter and the "Clear all" button (Flexbox) */
+.bookings-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.bookings-summary {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* My bookings: the cards (Grid): 1 column on a phone, 2 from 768px */
+.bookings-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .bookings-list { grid-template-columns: 1fr 1fr; }
+}
+.booking-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--surface);
+  border: 2px solid var(--line);
+  border-top: 8px solid var(--red);
+  transition: border-color 0.3s, background-color 0.3s;   /* not "all": jQuery fades the opacity */
+}
+.booking-card:hover {
+  border-color: var(--red);
+  background-color: var(--surface-alt);
+}
+.booking-card h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+.booking-card p {
+  margin: 0;
+}
+.booking-price {
+  font-weight: 600;
+  color: var(--red-text);
+}
+.btn-remove {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  background-color: transparent;
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 0;
+  transition: border-color 0.3s, color 0.3s;
+}
+.btn.btn-remove:hover,
+.btn.btn-remove:focus-visible,
+.btn.btn-remove:active {
+  background-color: transparent;
+  color: var(--red-text);
+  border-color: var(--red);
+}
+
+/* My bookings: the empty state */
+.empty-box {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: var(--surface);
+  border: 2px dashed var(--line);
 }
 
 
