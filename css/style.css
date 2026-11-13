@@ -612,3 +612,24 @@ footer a:focus-visible {
   h2 { font-size: 2.25rem; }
   .hero { padding: 5rem 0; }
 }
+
+
+/* ---------- 14. Smooth mode switching ---------- */
+/* the canvas behind the page has the color of the mode, so there is no white flash between pages */
+html {
+  background-color: var(--bg);
+}
+/* the text of the mode button: made by CSS, so it does not change after the page is loaded */
+.theme-toggle::after {
+  content: "Dark mode";
+}
+[data-bs-theme="dark"] .theme-toggle::after {
+  content: "Light mode";
+}
+/* js/theme.js adds this class for 50 ms when the button is pressed: all colors change at the same moment */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}

@@ -16,11 +16,13 @@ function getTheme() {
 
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-bs-theme", theme);
+  document.documentElement.style.colorScheme = theme;   // the browser draws its own parts (scrollbar, empty page) in the same mode
 
+  // The text of the button is made by CSS (.theme-toggle::after), so it is right from the first frame.
+  // Here only the label for screen readers is updated.
   const button = document.getElementById("theme-toggle");
   if (button) {
     const next = theme === "dark" ? "light" : "dark";
-    button.textContent = (next === "dark" ? "Dark" : "Light") + " mode";   // the button shows the NEXT mode
     button.setAttribute("aria-label", "Switch to " + next + " mode");
   }
 }
@@ -34,6 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const current = document.documentElement.getAttribute("data-bs-theme");
     const next = current === "dark" ? "light" : "dark";
     writeJSON(THEME_KEY, next);
+
+    // switch all colors at the same moment: the transitions are turned off for a short time
+    document.documentElement.classList.add("theme-switching");
     applyTheme(next);
+    setTimeout(function () {
+      document.documentElement.classList.remove("theme-switching");
+    }, 50);
   });
 });
